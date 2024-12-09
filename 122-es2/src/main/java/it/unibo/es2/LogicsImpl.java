@@ -1,8 +1,11 @@
 package it.unibo.es2;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LogicsImpl implements Logics{
     
@@ -31,6 +34,16 @@ public class LogicsImpl implements Logics{
     }
 
     @Override
+    public List<Map.Entry<Pair<Integer,Integer>,String>> buttons() {
+        return buttons
+        .entrySet()
+        .stream()
+        .sorted((a, b) -> a.getKey().getX() - b.getKey().getX())
+        .sorted((a, b) -> a.getKey().getY() - b.getKey().getY())
+        .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean toQuit(Pair<Integer,Integer> buttonPosition) {
         boolean quit = true;
         for(int i=0; i<size && quit; i++) {
@@ -42,7 +55,7 @@ public class LogicsImpl implements Logics{
         if(quit) {
             return quit;
         }
-        
+
         quit = true;
         for(int i=0; i<size && quit; i++) {
             if( buttons.get(new Pair<Integer, Integer>(buttonPosition.getX(), i)).equals(" ")) {

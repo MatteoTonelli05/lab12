@@ -26,15 +26,15 @@ public class GUI extends JFrame {
                 System.exit(1);
             } 
         };
-                
-        for (int i=0; i<size; i++){
-            for (int j=0; j<size; j++){
-                final JButton jb = new JButton(" ");
-                jb.addActionListener(al);
-                this.buttons.put(jb,new Pair<>(i,j));
-                panel.add(jb);
-            }
-        }
+        
+        logics.buttons()
+            .forEach(v -> {
+            final JButton jb = new JButton(" ");
+            jb.addActionListener(al);
+            this.buttons.put(jb,v.getKey());
+            panel.add(jb);
+        });
+       
         this.setVisible(true);
     }   
 }

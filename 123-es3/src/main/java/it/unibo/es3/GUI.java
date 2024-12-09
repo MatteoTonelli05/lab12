@@ -1,36 +1,48 @@
 package it.unibo.es3;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.*;
 import java.util.List;
 
 public class GUI extends JFrame {
-    
-    private final List<JButton> cells = new ArrayList<>();
-    
+
+    private final Logics logics;
+
     public GUI(int width) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(70*width, 70*width);
+        logics = new LogicsImpl(width);
         
         JPanel panel = new JPanel(new GridLayout(width,width));
         this.getContentPane().add(panel);
-        
-        ActionListener al = e -> {
-            var jb = (JButton)e.getSource();
-        	jb.setText(String.valueOf(cells.indexOf(jb)));
-        };
+
+        logics.buttons().forEach(v -> {
+			JButton jb = new JButton(String.valueOf(v));
+            jb.addKeyListener(new KeyListener() {
+
+                @Override
+                public void keyTyped(final KeyEvent e) {
+                }
+
+                @Override
+                public void keyPressed(final KeyEvent e) {
+                    if(jb.getText() == "*" && e.getKeyCode() == 39 ) {
+                        System.out.println("no");
+                    }
+                }
+
+                @Override
+                public void keyReleased(final KeyEvent e) {
+                }
                 
-        for (int i=0; i<width; i++){
-            for (int j=0; j<width; j++){
-            	var pos = new Pair<>(j,i);
-                final JButton jb = new JButton(pos.toString());
-                this.cells.add(jb);
-                jb.addActionListener(al);
-                panel.add(jb);
-            }
-        }
+            });
+			panel.add(jb);
+			this.getContentPane().add(jb);
+		});
+
         this.setVisible(true);
     }
     
