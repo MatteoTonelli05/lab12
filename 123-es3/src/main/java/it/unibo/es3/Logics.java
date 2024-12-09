@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public interface Logics {
 
-    ArrayList<String> buttons();
+    public ArrayList<String> buttons();
 
-    
+    public void hit();
+
+    public boolean toQuit();
 }

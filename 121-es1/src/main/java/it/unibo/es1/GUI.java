@@ -12,7 +12,11 @@ public class GUI extends JFrame{
 	
 	final List<JButton> jbs = new ArrayList<>();
 
-	public GUI(int size){
+	/**
+	 * constructor.
+	 * @param size
+	 */
+	public GUI(final int size){
 		final Logics logics = new LogicsImpl(size);
 		this.setSize(500, 100);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
