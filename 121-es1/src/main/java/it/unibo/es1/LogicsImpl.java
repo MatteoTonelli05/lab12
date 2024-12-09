@@ -1,46 +1,56 @@
 package it.unibo.es1;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LogicsImpl implements Logics {
 
+	private int size;
+	private ArrayList<Integer> buttonsHit;
+	private ArrayList<Boolean> buttonsEnabled;
+
 	public LogicsImpl(int size) {
-		//TODO Auto-generated constructor stub
+		this.size = size;
+		buttonsHit = new ArrayList<>(Collections.nCopies(size, 0));
+		buttonsEnabled = new ArrayList<>(Collections.nCopies(size, true));
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'size'");
+		return size;
 	}
 
 	@Override
 	public List<Integer> values() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'values'");
+		return buttonsHit;
 	}
 
 	@Override
 	public List<Boolean> enablings() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'enablings'");
+		return buttonsEnabled;
 	}
 
 	@Override
 	public int hit(int elem) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'hit'");
+		buttonsHit.set(elem, buttonsHit.get(elem) + 1);
+		return buttonsHit.get(elem);
 	}
 
 	@Override
 	public String result() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'result'");
+		return this.buttonsHit
+			.stream()
+			.map(Object::toString)
+			.collect(Collectors.joining(",","<<",">>"));
 	}
 
 	@Override
 	public boolean toQuit() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'toQuit'");
+		return buttonsHit
+			.stream()
+			.distinct()
+			.count() == 1;
 	}
 }
