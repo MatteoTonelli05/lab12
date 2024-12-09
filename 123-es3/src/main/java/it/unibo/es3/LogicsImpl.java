@@ -37,8 +37,9 @@ public class LogicsImpl implements Logics{
 
     private void updateButton(List<Integer> buttonToChange, int width) {
         buttonToChange.forEach(i -> {
+            int limitX = (i % width == width - 1)? 1 : 2 ;
             for(int y=-1; y<2 ; y++) {
-                for(int x=-1; x<2 ; x++) {
+                for(int x=(i % width == 0)? 0 : -1; x < limitX ; x++) {
                     int tmp = i+x+(y*width);
                     if(checkButton(tmp, size)) {
                         buttons.set(tmp, "*");
