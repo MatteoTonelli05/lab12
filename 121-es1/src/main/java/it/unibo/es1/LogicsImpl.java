@@ -35,6 +35,9 @@ public class LogicsImpl implements Logics {
 	@Override
 	public int hit(int elem) {
 		buttonsHit.set(elem, buttonsHit.get(elem) + 1);
+		if( buttonsHit.get(elem) == this.size) {
+			buttonsEnabled.set(elem, false);
+		}
 		return buttonsHit.get(elem);
 	}
 
